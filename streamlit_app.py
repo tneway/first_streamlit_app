@@ -32,7 +32,7 @@ st.header("Fruityvice Fruit Advice!")
 fruit_choice = st.text_input('What fruit would you like information about?','Kiwi')
 st.write('The user entered ', fruit_choice)
 # write your own comment -what does the next line do? 
-fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
+#fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
 # write your own comment - what does this do?
 st.dataframe(fruityvice_normalized)
 
