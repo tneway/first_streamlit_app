@@ -11,6 +11,7 @@ st.title("My parents healthy diner")
 # streamlit.text('🐔 Hard-Boiled Free-Range Egg')
 # streamlit.text('🥑🍞 Avocado toast')
 
+
 my_fruit_list = pd.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")
 
 my_fruit_list = my_fruit_list.set_index('Fruit')
@@ -34,6 +35,9 @@ st.write('The user entered ', fruit_choice)
 fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
 # write your own comment - what does this do?
 st.dataframe(fruityvice_normalized)
+
+# don't run anythng below
+st.stop()
 
 my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
 my_cur = my_cnx.cursor()
