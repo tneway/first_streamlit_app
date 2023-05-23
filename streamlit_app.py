@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import requests
 import snowflake.connector
+from urllib.error import URLError
 
 st.title("My parents healthy diner")
 
@@ -20,15 +21,14 @@ fruits_selected = st.multiselect("Pick some fruits:", list(my_fruit_list.index),
 
 fruits_to_show = my_fruit_list.loc[fruits_selected]
 #streamlit.dataframe(my_fruit_list)
+# display the table on the page
 st.dataframe(fruits_to_show)
 
 #import requests
-fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
+#fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
 
 
 st.header("Fruityvice Fruit Advice!")
-st.text(fruityvice_response.json())
-
 fruit_choice = st.text_input('What fruit would you like information about?','Kiwi')
 st.write('The user entered ', fruit_choice)
 # write your own comment -what does the next line do? 
