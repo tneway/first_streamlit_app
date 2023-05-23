@@ -28,14 +28,18 @@ st.dataframe(fruits_to_show)
 
 
 st.header("Fruityvice Fruit Advice!")
-fruit_choice = st.text_input('What fruit would you like information about?','Kiwi')
-st.write('The user entered ', fruit_choice)
-# write your own comment -what does the next line do? 
-fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
-
-fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
-# write your own comment - what does this do?
-st.dataframe(fruityvice_normalized)
+try:
+    fruit_choice = st.text_input('What fruit would you like information about?','Kiwi')
+    if not fruit_choice:
+        st.write('The user entered ', fruit_choice)
+    else:
+        # write your own comment -what does the next line do? 
+        fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
+        fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
+        # write your own comment - what does this do?
+        st.dataframe(fruityvice_normalized)
+except URLError as e:
+    st.error()
 
 # don't run anythng below
 st.stop()
