@@ -31,7 +31,7 @@ st.header("Fruityvice Fruit Advice!")
 try:
     fruit_choice = st.text_input('What fruit would you like information about?','')
     if not fruit_choice:
-        st.write('The user entered ', fruit_choice)
+        st.error("please select a fruit to get information")
     else:
         # write your own comment -what does the next line do? 
         fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
