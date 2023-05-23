@@ -45,21 +45,28 @@ except URLError as e:
     st.error()
 
 # don't run anythng below
-st.stop()
+#st.stop()
 
-my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
-my_cur = my_cnx.cursor()
-my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
-my_data_row = my_cur.fetchone()
-st.text("Hello from Snowflake:")
-st.text(my_data_row)
+st.header("The furit load list contains:")
+# snowflake related function 
+def get_fruit_load_list():
+    with my_cnx.cursor() as my_cur:
+        my_cur.execute("select * from fruit_load_list")
+        return my_cur.fetchall()
+
+# Add a button to load the fruit
+if st.button('Get Fruit Load List'):
+    my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
+    my_data_rows = get_fruit_load_list()
+    st.dataframe(my_data_rows)
 
 
-my_cur.execute("select * from fruit_load_list")
-my_data_rows=my_cur.fetchall()
-st.header("The fruit load list contains:")
-st.dataframe(my_data_rows)
-second_choice = st.text_input("What fruit would you like to add","kiwi")
-st.write("enteer fruit", second_choice)
-st.text("Thanks for enrering : " + second_choice)
-my_cur.execute("insert into fruit_load_list values('from streamlit');")
+
+# my_cur.execute("select * from fruit_load_list")
+# my_data_rows=my_cur.fetchall()
+# st.header("The fruit load list contains:")
+# st.dataframe(my_data_rows)
+# second_choice = st.text_input("What fruit would you like to add","kiwi")
+# st.write("enteer fruit", second_choice)
+# st.text("Thanks for enrering : " + second_choice)
+# my_cur.execute("insert into fruit_load_list values('from streamlit');")
