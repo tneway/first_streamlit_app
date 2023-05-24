@@ -47,7 +47,7 @@ except URLError as e:
 # don't run anythng below
 #st.stop()
 
-st.header("The furit load list contains:")
+st.header("View Our Furit List - Add Your Favorites!")
 # snowflake related function 
 def get_fruit_load_list():
     with my_cnx.cursor() as my_cur:
@@ -55,7 +55,7 @@ def get_fruit_load_list():
         return my_cur.fetchall()
 
 # Add a button to load the fruit
-if st.button('Get Fruit Load List'):
+if st.button('Get Fruit List'):
     my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
     my_data_rows = get_fruit_load_list()
     my_cnx.close()
